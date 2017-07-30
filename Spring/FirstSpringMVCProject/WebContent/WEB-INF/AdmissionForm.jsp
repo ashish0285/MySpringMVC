@@ -1,9 +1,12 @@
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <body>
 <h1>${headerMessage}</h1>
 
 <h3>Student Admission Form</h3>
 
+<form:errors path="student1.*"/>
+<br>
 <form action = "/FirstSpringMVCProject/submitAdmissionForm.html" method = "post">
 <table>
 <tr>
@@ -26,8 +29,19 @@
 							</select></td>
 </tr>
 </table>
+<table>
+<tr><td>Student Address :</td></tr>
+<tr>
+<td> Country : <input type="text" name="studentAddress.country"/></td>
+<td> City : <input type="text" name="studentAddress.city"/></td>
+<td> Street : <input type="text" name="studentAddress.street"/></td>
+<td> Pincode : <input type="text" name="studentAddress.pincode"/></td>
+</tr>
+<tr><td><input type="submit" value="Submit this Form by Clicking Here"/></td></tr>
 
-<input type="submit" value="Submit this Form by Clicking Here"/>
+</table>
+
+
 </form>
 
 </body>
