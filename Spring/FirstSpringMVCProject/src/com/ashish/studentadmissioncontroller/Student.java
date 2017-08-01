@@ -10,9 +10,17 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 import com.ashish.validator.IsValidHobby;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties("studentHobby")
+@JsonPropertyOrder({"Student_Name","studentDOB","studentMobile","studentAddress","studentSkills"})
 public class Student {
-	@Pattern(regexp="[^0-9]*")
+	
+	@JsonProperty("Student_Name") @Pattern(regexp="[^0-9]*")
 	private String studentName;
 	
 	@Size(min=2, max=30) @IsValidHobby(listOfValidHobbies="Music|Programming|TT|Cricket")

@@ -11,12 +11,26 @@
    ">
    
    <!-- bean id="HandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" /-->
-   
+   <!--bean name="/welcome.html" class="com.ashish.hellocontroller.HelloController" /--> 
+    
    <mvc:annotation-driven/>
    <context:component-scan base-package="com.ashish.studentadmissioncontroller"/>
    
-   <!--bean name="/welcome.html" class="com.ashish.hellocontroller.HelloController" /--> 
+   <mvc:resources mapping="/resources/**" location="/WEB-INF/"/>
+  
    
+  <mvc:interceptors>
+        
+     <mvc:interceptor>
+     	<mvc:mapping path="/admissionForm.html"/>
+   		<bean class="com.ashish.Interceptors.DayOfWeekBasedAccessInterceptor"/>   		
+   	</mvc:interceptor>
+   	
+   	<bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+   	   	<property name="paramName" value="siteTheme"></property>
+   	</bean>
+   	   	
+  </mvc:interceptors>
    
    
    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
@@ -29,5 +43,11 @@
 		  <property name="basename" value="WEB-INF/studentmessages"/>
 		  <!-- <property name="cacheSeconds" value="1"/> use during development only-->
 	</bean>
-
+    <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource" >
+		  <property name="basenamePrefix" value="theme-"/> 
+	</bean>
+	<bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver" >
+		  <property name="defaultThemeName" value="green"/> 
+	</bean>
+	
 </beans>
